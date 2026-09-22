@@ -259,9 +259,11 @@ public struct FloatRule: Equatable {
         self.title = title
     }
 
-    public func matches(bundleID: String?, title windowTitle: String?) -> Bool {
+    public func matches(bundleID: String?, localizedName: String? = nil, title windowTitle: String?) -> Bool {
         if let app {
-            guard let bundleID, Self.glob(app.lowercased(), matches: bundleID.lowercased()) else { return false }
+            let matchesBundle = bundleID != nil && Self.glob(app.lowercased(), matches: bundleID!.lowercased())
+            let matchesName = localizedName != nil && Self.glob(app.lowercased(), matches: localizedName!.lowercased())
+            guard matchesBundle || matchesName else { return false }
         }
         if let t = self.title {
             guard let windowTitle, windowTitle.lowercased().contains(t.lowercased()) else { return false }
@@ -413,6 +415,7 @@ public struct Config: Equatable {
         FloatRule(app: "com.raycast.macos"),
         FloatRule(app: "com.apple.ActivityMonitor"),
         FloatRule(app: "dev.tryomarchy.native"),
+        FloatRule(app: "Try Omarchy"),
     ]
 
     /// The whole default config, also written to disk on first run.

@@ -1985,7 +1985,7 @@ h.test("the shipped default config parses cleanly") { t in
     t.equal(c.dwindle.forceSplit, 2, "force_split")
     t.equal(c.border.activeStart, "#33ccffee", "Omarchy active border gradient start")
     t.equal(c.border.radius, -1, "radius follows the window's own corner radius")
-    t.equal(c.floatRules.count, 6, "float rules")
+    t.equal(c.floatRules.count, 7, "float rules")
     t.equal(c.floating.width, 0.70, "floating width fraction")
     t.equal(c.floating.height, 0.80, "floating height fraction")
     t.equal(c.floating.largeWidth, 0.80, "the cycle's second width fraction")

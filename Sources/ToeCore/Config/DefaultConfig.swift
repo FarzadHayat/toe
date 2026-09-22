@@ -466,5 +466,7 @@ title = "Copy"
 app = "com.apple.ActivityMonitor"
 [[float]]
 app = "dev.tryomarchy.native"
+[[float]]
+app = "Try Omarchy"
 
 """#

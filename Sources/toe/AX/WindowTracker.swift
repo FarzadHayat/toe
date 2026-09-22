@@ -29,6 +29,7 @@ final class ManagedWindow {
     let owner: HelperOwner?
     /// The owner's bundle identifier when there is one, else the process's own.
     let bundleID: String?
+    let localizedName: String?
     var title: String?
     /// Where the window sat before it was stashed off-screen, so floating windows come back
     /// to exactly where they were.
@@ -45,12 +46,13 @@ final class ManagedWindow {
     var stashPending = false
 
     init(id: CGWindowID, element: AXUIElement, pid: pid_t, owner: HelperOwner?,
-         bundleID: String?, title: String?) {
+         bundleID: String?, localizedName: String?, title: String?) {
         self.id = id
         self.element = element
         self.pid = pid
         self.owner = owner
         self.bundleID = bundleID
+        self.localizedName = localizedName
         self.title = title
     }
 
@@ -153,7 +155,7 @@ final class WindowTracker {
     /// The float rules' answer for a window, asked again for one that has come out from
     /// behind a tab and is being placed for the first time.
     func shouldFloat(_ window: ManagedWindow) -> Bool {
-        floatRules.contains { $0.matches(bundleID: window.bundleID, title: window.title) }
+        floatRules.contains { $0.matches(bundleID: window.bundleID, localizedName: window.localizedName, title: window.title) }
     }
 
     // MARK: - Lifecycle
@@ -385,7 +387,7 @@ final class WindowTracker {
         let owner = owners[pid]
         let app = owner?.application ?? NSRunningApplication(processIdentifier: pid)
         let window = ManagedWindow(id: id, element: element, pid: pid, owner: owner,
-                                   bundleID: app?.bundleIdentifier, title: element.title)
+                                   bundleID: app?.bundleIdentifier, localizedName: app?.localizedName, title: element.title)
         windows[id] = window
 
         if let observer = observers[pid] {
