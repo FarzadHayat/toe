@@ -464,5 +464,7 @@ app = "com.apple.finder"
 title = "Copy"
 [[float]]
 app = "com.apple.ActivityMonitor"
+[[float]]
+app = "dev.tryomarchy.native"
 
 """#

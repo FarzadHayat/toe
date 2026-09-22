@@ -412,6 +412,7 @@ public struct Config: Equatable {
         FloatRule(app: "com.1password.1password"),
         FloatRule(app: "com.raycast.macos"),
         FloatRule(app: "com.apple.ActivityMonitor"),
+        FloatRule(app: "dev.tryomarchy.native"),
     ]
 
     /// The whole default config, also written to disk on first run.
